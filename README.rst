@@ -1,5 +1,5 @@
 ===============================================
-Django Traceability |latest-version|
+Django Traceability
 ===============================================
 
 This project may be split into smaller apps. As well, any part or feature that can be better provided by another reusable app should be
