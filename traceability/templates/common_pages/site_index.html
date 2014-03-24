@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block page_title %}OverView{% endblock %}
+
+{% block content %}
+          <div class="row">
+            <div class="col-md-6">
+              <h2 class="sub-header text-center">Graph of Inventory</h2>
+              <div class="row placeholders">
+                <div class="col-xs-4 col-sm-4 placeholder">
+                  <img data-src="holder.js/125x125/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
+                  <h4>0-2 Month</h4>
+                  <span class="text-muted">15%</span>
+                </div>
+                <div class="col-xs-4 col-sm-4 placeholder">
+                  <img data-src="holder.js/125x125/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
+                  <h4>2-4 Month</h4>
+                  <span class="text-muted">15%</span>
+                </div>
+                <div class="col-xs-4 col-sm-4 placeholder">
+                  <img data-src="holder.js/125x125/auto/lava" class="img-responsive" alt="Generic placeholder thumbnail">
+                  <h4>4-6 Month</h4>
+                  <span class="text-muted">15%</span>
+                </div>
+              </div>
+              <div class="row placeholders">
+                <div class="col-xs-4 col-sm-4 placeholder">
+                  <img data-src="holder.js/125x125/auto/gray" class="img-responsive" alt="Generic placeholder thumbnail">
+                  <h4>6-8 Month</h4>
+                  <span class="text-muted">15%</span>
+                </div>
+                <div class="col-xs-4 col-sm-4 placeholder">
+                  <img data-src="holder.js/125x125/auto/industrial" class="img-responsive" alt="Generic placeholder thumbnail">
+                  <h4>8-12 Month</h4>
+                  <span class="text-muted">15%</span>
+                </div>
+                <div class="col-xs-4 col-sm-4 placeholder">
+                  <img data-src="holder.js/125x125/auto/social" class="img-responsive" alt="Generic placeholder thumbnail">
+                  <h4>12+ Month</h4>
+                  <span class="text-muted">25%</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <h2 class="sub-header  text-center">Unresolved Incidents</h2>
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Incident</th>
+                      <th>Date-Time</th>
+                      <th>Severity</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for incident in incidents %}
+                    <tr>
+                      <td>
+                        <div class="list-group">
+                          <a class="list-group-item" href="{{ incident.get_absolute_url }}">{{ incident }}</a>
+                        </div>
+                      </td>
+                      <td>{{ incident.date_time }}</td>
+                      <td>{{ incident.get_severity_level }}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+               </div>
+            </div>
+          </div>
+{% endblock content %}
+

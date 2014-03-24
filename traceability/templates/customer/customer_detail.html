@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+      <div class="panel-heading">
+        <p><strong>{{ customer }}</strong></p>
+        <em>{{ customer.address }}</em>
+      </div>
+      <!-- Table -->
+      <table class="table">
+      <tr>
+        <th>Shipment</th>
+        <th>Shipment Date</th>
+        <th>Location</th>
+        <th>Invoice</th>
+      </tr>
+      {% for shipment in customer.shipment_set.all %}
+      <tr>
+        <td><a href="{{ shipment.get_absolute_url }}">{{ shipment.id }}</a></td>
+        <td>{{ shipment.date_shipped }}</td>
+        <td>{{ shipment.address }}</td>
+        <td>{{ shipment.invoice_number }}</td>
+      </tr>
+      {% endfor %}
+      </table>
+    </div><!--./panel-->
+  </div><!--./col-md-12-->
+</div><!--./row-->
+
+{% endblock content %}

@@ -1,0 +1,19 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+    <Joost VanDorp> -- <Lead Designer/Developer> -- <@vandorjw>
+
+# THANKS
+
+    <mattmcc>
+    <FunkyBob>
+    
+
+# TECHNOLOGY COLOPHON
+
+    HTML5, CSS3
+    jQuery, Modernizr
+    Python3, Django1.6
+    Bootstrap3, 

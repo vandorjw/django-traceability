@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load staticfiles crispy_forms_tags %}
+
+{% block page_title %}{{ object }}{% endblock %}
+
+{% block content %}
+        <h1>Incident: {{ object }}</h1>
+        <form action="." method="post">{% csrf_token %}
+            <div>
+                {{ form|crispy }}
+            </div>
+            <fieldset>
+                <legend>Update</legend>
+                {{ update_form.management_form }}
+                {{ update_form.non_form_errors }}
+                {% for form in update_form %}
+                    {{ form.id }}
+                    {{ form|crispy }}
+                {% endfor %}
+            </fieldset>
+            <hr />
+            <input type="submit" value="Save" class="submit" />
+        </form>
+    </div>
+{% endblock content %}
+

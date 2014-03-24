@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form action="." method="POST">{% csrf_token %}
+   <table>{{ formset }}</table>
+   <input type="submit" value="Go" />
+</form>
+

@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block page_title %}Batch: {{ batch.batch_id }}{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+      <div class="panel-heading">
+        <em>Batch: {{ batch.batch_id }}</em>
+      </div>
+      <!-- Table -->
+      <table class="table">
+      <tr>
+        <td><strong>CREATED ON</strong></td>
+        <td>{{batch.creation_date}}</td>
+      </tr>  
+      </table>
+      <!-- Table -->
+        <table class="table">
+          <tr>
+            <th>Input</th>
+            <th>Material ID</th>
+            <th>Supplier</th>
+          </tr>
+          {% for input in batch.input_set.all %}
+          <tr>
+            <td>{{ input.material.type }}</td>
+            <td>
+              <a class="btn btn-primary btn-block" href={{input.material.get_absolute_url}}>{{ input.material }}</a>
+            </td>
+            <td>
+              <a class="btn btn-primary btn-block" href={{input.material.supplier.get_absolute_url}}>{{ input.material.supplier }}</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </table>
+    </div>
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+      <div class="panel-heading">
+        <p><strong>Incidents</strong></p>
+      </div>
+      <!-- Table -->
+      <table class="table">
+      <tr>
+        <th><strong>Incident</strong></th>
+        <th><strong>Resolved</strong></th>
+      </tr>
+      {% for incident in batch.incidents.all %}
+      <tr>
+        {% if incident.is_resolved %}
+        <td><a class="btn btn-info btn-block" href={{incident.get_absolute_url}}>{{ incident }}</a></td>
+        {% else %}
+        <td><a class="btn btn-warning btn-block" href={{incident.get_absolute_url}}>{{ incident }}</a></td>
+        {% endif %}
+        <td>{{ incident.is_resolved }}</td>
+      </tr>
+      {% endfor %}
+      </table>
+      <a class="btn btn-danger hidden-print" href={% url 'traceability:batch:batch_update' pk=object %}>Add Incident</a>
+    </div><!--./panel-->
+  </div>
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+      <div class="panel-heading">Items from this Batch</div>
+      <!-- Table -->
+      <table class="table">
+        <tr>
+          <th>Wheel Number</th>
+          <th>Ship Log ID</th>
+        </tr>
+        {% for item in batch.item_set.all %}
+        <tr>
+          <td><a class="btn btn-primary btn-block" href="{{ item.get_absolute_url }}">{{ item }}</a></td>
+          <td><a class="btn btn-primary btn-block" href="{{ item.shipment.get_absolute_url }}">{{ item.shipment }}</a></td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+</div>
+
+
+{% endblock content %}
+

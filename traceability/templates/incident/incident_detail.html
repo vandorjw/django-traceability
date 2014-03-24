@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+{% block page_title %}Incident: {{ object }}{% endblock %}
+
+{% block content %}
+<div class="container">
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+      <div class="panel-heading">
+        <p><strong>Incident: {{ object }}</strong></p>
+      </div>
+      <!-- Table -->
+      <table class="table">
+      <tr>
+        <td><strong>Date and Time</strong></td>
+        <td>{{ object.date_time }}</td>
+      </tr>
+      <tr>
+        <td><strong>Severity</strong></td>
+        <td>{{ object.get_severity_level }}</td>
+      </tr>
+      <tr>
+        <td><strong>Resolved:</strong></td>
+        <td>{{ object.is_resolved }}</td>
+      </tr>
+      <tr>
+        <td><strong>Description</strong></td>
+        <td>{{ object.text }}</td>
+      </tr>
+      </table>
+    </div><!--./panel-->
+
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+      <div class="panel-heading">
+        <p><strong>Updates</strong></p>
+      </div>
+      <!-- Table -->
+      <table class="table">
+      <tr>
+        <th>Date and Time</th>
+        <th>Details</th>
+      </tr>
+      {% for update in object.update_set.all %}
+      <tr>
+        <td>{{ update.date_time }}</td>
+        <td>{{ update.text }}</td>
+      </tr>
+      {% endfor %}
+      </table>
+      <hr />
+      <a class="btn btn-danger hidden-print" href="{% url 'traceability:incident:incident_update' pk=object.id %}">
+        <span>Update Incident</span>
+      </a>
+    </div><!--./panel-->
+
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+      <div class="panel-heading">
+          <table class="table">
+              <tr>
+                  <td>
+                      <p><strong>Affected Items</strong></p>
+                  </td>
+                  <td>
+                      <a class="btn btn-primary" href="{% url 'traceability:incident:incident_affected' pk=object.id %}">
+                        <span>Complete Affected Tree</span>
+                      </a>
+                  </td>
+              </tr>
+          </table>
+      </div>
+      <!-- Table -->
+      <table class="table">
+      <tr>
+        <th>Object Type</th>
+        <th>Object Details</th>
+      </tr>
+
+      {% if object.item_set.exists %}
+      {% for item in object.item_set.all %}
+      <tr>
+        <td>Item</td>
+        <td><a class="btn btn-info btn-block" href="{{ item.get_absolute_url }}">{{ item }}</a></td>
+      </tr>
+      {% endfor %}
+      {% endif %}
+
+      {% if object.batch_set.exists %}
+      {% for batch in object.batch_set.all %}
+      <tr>
+        <td>Batch</td>
+        <td><a class="btn btn-info btn-block" href="{{ batch.get_absolute_url }}">{{ batch }}</a></td>
+      </tr>
+      {% endfor %}
+      {% endif %}
+
+      {% if object.material_set.exists %}
+      {% for material in object.material_set.all %}
+      <tr>
+        <td>Material</td>
+        <td><a class="btn btn-info btn-block" href="{{ material.get_absolute_url }}">{{ material }}</a></td>
+      </tr>
+      {% endfor %}
+      {% endif %}
+
+      </table>
+    </div><!--./panel-->
+  </div><!--./col-md-12-->
+
+</div><!--./row-->
+</div>
+
+{% endblock content %}

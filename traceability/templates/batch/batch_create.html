@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load staticfiles crispy_forms_tags %}
+
+{% block page_title %}Create Batch{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/jquery.formset.js' %}"></script>
+<script type="text/javascript">
+    $(function() {
+        $(".inline.{{ input_form.prefix }}").formset({
+            prefix: "{{ input_form.prefix }}",
+        })
+    })
+</script>
+{% endblock extra_js %}
+
+{% block content %}
+        <h1>Batch</h1>
+        <form action="." method="post">{% csrf_token %}
+            <div>
+                {{ form|crispy }}
+            </div>
+            <fieldset>
+                <legend>Input</legend>
+                {{ input_form.management_form }}
+                {{ input_form.non_form_errors }}
+                {% for form in input_form %}
+                    {{ form.id }}
+                    <div class="inline {{ input_form.prefix }}">
+                        {{ form|crispy }}
+                    </div>
+                {% endfor %}
+            </fieldset>
+            <hr />
+            <input type="submit" value="Save" class="submit" />
+        </form>
+    </div>
+{% endblock content %}
+

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block page_title %}Shipments{% endblock %}
+
+{% block content %}
+<table class="table">
+  <tr>
+    <th>Shipment ID</th>
+    <th>Shipping Date</th>
+    <th>Customer</th>
+    <th>Address</th>
+    <th>Invoice</th>
+  </tr>
+
+  {% if object_list %} 
+  {% for shipment in object_list %}
+  <tr>
+    <td>
+      <a class="btn btn-primary btn-block"
+         href="{{ shipment.get_absolute_url }}">
+        {{ shipment.id }}
+      </a>
+    </td>
+    <td>{{ shipment.date_shipped }}</td>
+    <td>{{ shipment.customer }}</td>
+    <td>{{ shipment.address }}</td>
+    <td>{{ shipment.invoice_number }}</td>   
+  </tr>
+  {% endfor %}
+  {% endif %}
+
+</table>
+
+{% if is_paginated %}
+  {% include "includes/pagination.html" %}
+{% endif %}
+
+{% endblock %}
+

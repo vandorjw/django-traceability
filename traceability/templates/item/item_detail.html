@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block page_title %}Item: {{ item }}{% endblock %}
+
+{% block content %}
+<div class="container">
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+      <div class="panel-heading">
+        <p><strong>Item: {{ item }}</strong></p>
+      </div>
+      <!-- Table -->
+      <table class="table">
+        <tr>
+          <td><strong>Batch</strong></td>
+          <td><a class="btn btn-default btn-block" href="{{ item.batch.get_absolute_url }}">{{ item.batch }}</a></td>
+        </tr>
+        <tr>
+          <td><strong>Age</strong></td>
+          <td>{{ item.item_age }}</td>
+        </tr>
+        <tr>
+          <td><strong>Shipment</strong></td>
+          <td>{{ item.shipment }}</td>
+        </tr>
+      </table>
+    </div><!--./panel-->
+
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+      <div class="panel-heading">
+        <p><strong>Incident</strong></p>
+      </div>
+      <!-- Table -->
+      <table class="table">
+      <tr>
+        <th><strong>Incident</strong></th>
+        <th><strong>Resolved</strong></th>
+      </tr>
+      {% for incident in item.incidents.all %}
+      <tr>
+        {% if incident.is_resolved %}
+        <td><a class="btn btn-info btn-block" href={{incident.get_absolute_url}}>{{ incident }}</a></td>
+        {% else %}
+        <td><a class="btn btn-warning btn-block" href={{incident.get_absolute_url}}>{{ incident }}</a></td>
+        {% endif %}
+        <td>{{ incident.is_resolved }}</td>
+      </tr>
+      {% endfor %}
+      </table>
+      <a class="btn btn-danger" href="{% url 'traceability:item:item_update' pk=object %}">Add Incident</a>
+    </div><!--./panel-->
+
+  </div><!--./col-md-6-->
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+      <div class="panel-heading">
+        <p><strong>Input</strong></p>
+      </div>
+      <!-- Table -->
+      <table class="table">
+      <tr>
+        <th><strong>Type</strong></th>
+        <th><strong>Material ID</strong></th>
+      </tr>
+      {% for input in item.batch.input_set.all %}
+      <tr>
+        <td>{{ input.material.type }}</td>
+        <td>
+          <a class="btn btn-default btn-block text-left" href="{{ input.material.get_absolute_url }}">
+            <span>{{ input.material.material_id }}</span>
+          </a>
+        </td>
+      </tr>
+      {% endfor %}
+      </table>
+    </div><!--./panel-->
+  </div><!--./col-md-6-->
+</div><!--./row-->
+</div>
+
+{% endblock content %}

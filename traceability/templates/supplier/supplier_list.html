@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block page_title %}Suppliers{% endblock %}
+
+{% block content %}
+<table class="table">
+  <tr>
+    <th>Name</th>
+    <th>Address</th>
+    <th>Phone</th>
+    <th>Email</th>
+  </tr>
+  {% for supplier in object_list %}
+  <tr>
+    <td><a class="btn btn-primary btn-block" href="{{ supplier.get_absolute_url }}">{{ supplier }}</a></td>
+    <td>{{ supplier.address }}</td>
+    <td>{{ supplier.phone }}</td>
+    <td>{{ supplier.email }}</td>   
+  </tr>
+  {% endfor %}
+</table>
+{% if is_paginated %}
+  {% include "includes/pagination.html" %}
+{% endif %}
+{% endblock %}
+

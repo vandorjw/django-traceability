@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block page_title %}Incident List{% endblock %}
+
+{% block content %}
+<table class="table">
+  <tr>
+    <th>Date Recorded</th>
+    <th>Title</th>
+    <th>Severity</th>
+  </tr>
+{% for incident in object_list %}
+  <tr>
+    <td>{{ incident.date_time }}</td>
+    {% if incident.is_resolved %}
+    <td><a class="btn btn-success btn-block" href={{ incident.get_absolute_url }}>{{ incident }}</td>
+    {% else %}
+    <td><a class="btn btn-warning btn-block" href={{ incident.get_absolute_url }}>{{ incident }}</td>
+    {% endif %}
+    <td>{{ incident.get_severity_level }}</td>
+  </tr>
+{% endfor %}
+</table>
+
+{% if is_paginated %}
+  {% include "includes/pagination.html" %}
+{% endif %}
+
+{% endblock %}

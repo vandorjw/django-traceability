@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block page_title %}Customers{% endblock %}
+
+{% block content %}
+<table class="table">
+  <tr>
+    <th>Name</th>
+    <th>Address</th>
+    <th>Phone</th>
+    <th>Email</th>
+  </tr>
+  {% for supplier in customer_list %}
+  <tr>
+    <td><a href="{{ supplier.get_absolute_url }}">{{ supplier }}</a></td>
+    <td>{{ supplier.address }}</td>
+    <td>{{ supplier.phone }}</td>
+    <td>{{ supplier.email }}</td>   
+  </tr>
+  {% endfor %}
+</table>
+
+{% if is_paginated %}
+  {% include "includes/pagination.html" %}
+{% endif %}
+
+{% endblock %}
+

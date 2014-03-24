@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+      <div class="panel-heading">
+        <p>{{ material.material_type }} | Material ID: <strong>{{ material.material_id }}</strong></p>
+      </div>
+      <!-- Table -->
+      <table class="table">
+      <tr>
+        <th>Batch ID</th>
+      </tr>
+      {% for input in object.input_set.all %}
+      <tr>
+        <td><a class="btn btn-primary btn-block" href="{{ input.batch.get_absolute_url  }}">{{ input.batch }}</a></td>
+      </tr>
+      {% endfor %}
+      </table>
+    </div><!--./panel-->
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+      <div class="panel-heading">
+        <p><strong>Incident</strong></p>
+      </div>
+      <!-- Table -->
+      <table class="table">
+      <tr>
+        <th><strong>Incident</strong></th>
+        <th><strong>Resolved</strong></th>
+      </tr>
+      {% for incident in object.incidents.all %}
+      <tr>
+        {% if incident.is_resolved %}
+        <td><a class="btn btn-info btn-block" href="{{ incident.get_absolute_url }}">{{ incident }}</a></td>
+        {% else %}
+        <td><a class="btn btn-warning btn-block" href="{{ incident.get_absolute_url }}">{{ incident }}</a></td>
+        {% endif %}
+        <td>{{ incident.is_resolved }}</td>
+      </tr>
+      {% endfor %}
+      </table>
+      <a class="btn btn-danger hidden-print" href="{% url 'traceability:material:material_update' pk=object.id %}">Add Incident</a>
+    </div><!--./panel-->
+  </div><!--./col-md-12-->
+</div><!--./row-->
+
+{% endblock content %}
+

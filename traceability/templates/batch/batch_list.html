@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block page_title %}Batch{% endblock %}
+
+{% block content %}
+<table class="table">
+  <tr>
+    <th>Batch Number</th>
+    <th>Creation Date</th>
+  </tr>
+  {% for batch in batch_list %}
+  <tr>
+    <td><a class="btn btn-primary btn-block" href="{{ batch.get_absolute_url }}">Batch {{ batch }}</a></td>
+    <td>{{ batch.creation_date }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+{% if is_paginated %}
+  {% include "includes/pagination.html" %}
+{% endif %}
+
+{% endblock %}
+

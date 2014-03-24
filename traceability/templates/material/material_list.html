@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block page_title %}Materials{% endblock %}
+
+{% block content %}
+<table class="table">
+  <tr>
+    <th>Material Type</th>
+    <th>Material ID</th>
+    <th>Supplier</th>
+    <th>Purchase Date</th>
+    <th>Expiration Date</th>
+  </tr>
+{% for material in object_list %}
+  <tr>
+    <td>{{ material.material_type }}</td>
+    <td><a class="btn btn-primary btn-block" href="{{ material.get_absolute_url }}">{{ material.material_id }}</a></td>
+    <td>{{ material.material_supplier }}</td>
+    <td>{{ material.purchase_date }}</td>
+    <td>{{ material.expiration_date }}</td>
+  </tr>
+{% endfor %}
+</table>
+
+{% if is_paginated %}
+  {% include "includes/pagination.html" %}
+{% endif %}
+{% endblock %}
+

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block page_title %}{{ supplier }}{% endblock %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+      <div class="panel-heading">
+        <p><strong>{{ supplier }}</strong></p>
+        <em>{{ supplier.address }}</em>
+      </div>
+      <!-- Table -->
+      <table class="table">
+      <tr>
+        <th>Materials Type</th>
+        <th>Material ID</th>
+        <th>Purchase Date</th>
+      </tr>
+      {% for material in supplier.material_set.all %}
+      <tr>
+        <td>{{ material.material_type }}</td>
+        <td><a class="btn btn-primary btn-block" href={{material.get_absolute_url}}>{{ material.material_id }}</a></td>
+        <td>{{ material.purchase_date }}</td>
+      </tr>
+      {% endfor %}
+      </table>
+    </div><!--./panel-->
+  </div><!--./col-md-12-->
+</div><!--./row-->
+
+{% endblock content %}

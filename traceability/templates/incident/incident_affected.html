@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block page_title %}Incident: {{object}}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <p><strong>Affected Objects</strong></p>
+                    <a href="{% url 'traceability:incident:incident_detail' pk=object.id %}">Back to details...</a>
+                </div>
+                <div class="panel-body">
+
+                    {% if object.material_set.exists %}
+                    <ul class="list-group">
+                        <p>Material</p>
+                        {% for material in object.material_set.all %}
+                        <li class="list-group-item" 
+                            data-toggle="collapse" 
+                            data-target="#material-batch-{{forloop.counter}}">
+                            {{ material }}
+                        </li>
+                        {% if material.batch_set.exists %}
+                        <li class="list-group-item">
+                            <ul class="list-group collapse" 
+                                id="material-batch-{{forloop.counter}}">
+                                <p>Batch</p>
+                                {% for batch in material.batch_set.all %}
+                                <li class="list-group-item"
+                                    data-toggle="collapse"
+                                    data-target="#material-batch-item-{{forloop.counter}}">
+                                    {{ batch }}
+                                </li>
+                                {% if batch.item_set.exists %}
+                                <li class="list-group-item">
+                                    <ul class="list-group collapse" 
+                                        id="material-batch-item-{{forloop.counter}}">
+                                        <p>Item</p>
+                                        {% for item in batch.item_set.all %}
+                                            <li class="list-group-item">{{ item }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                                {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+
+                    {% if object.batch_set.exists %}
+                    <ul class="list-group">
+                        <p>Batch</p>
+                        {% for batch in object.batch_set.all %}
+                        <li class="list-group-item" 
+                            data-toggle="collapse" 
+                            data-target="#batch-item-{{forloop.counter}}">
+                            {{ batch }}
+                        </li>
+                        {% if batch.item_set.exists %}
+                        <li class="list-group-item">
+                            <ul class="list-group collapse"
+                                id="batch-item-{{forloop.counter}}">
+                                <p>Item</p>
+                                {% for item in batch.item_set.all %}
+                                    <li class="list-group-item">{{ item }}</li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+
+                    {% if object.item_set.exists %}
+                    <ul class="list-group">
+                        <p>Item</p>
+                        {% for item in object.item_set.all %}
+                            <li class="list-group-item">{{ item }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+
+                </div>
+            </div>
+            <!--./panel-->
+        </div>
+        <!--./col-md-12-->
+
+    </div>
+    <!--./row-->
+</div>
+
+{% endblock content %}
