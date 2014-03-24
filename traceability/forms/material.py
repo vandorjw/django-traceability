@@ -1,12 +1,12 @@
 from django.forms import ModelForm
 from traceability.models.material import Material
 
-class MaterialCreateForm(ModelForm):
+class MaterialCreate(ModelForm):
     class Meta:
         model = Material
         exclude = ('incidents', )
 
-class MaterialUpdateForm(ModelForm):
+class MaterialUpdate(ModelForm):
     class Meta:
         model = Material
         fields = ['incidents', ]

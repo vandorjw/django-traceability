@@ -1,5 +1,5 @@
 from django.contrib import admin
-from traceability.models.material import MaterialName, Material
+from traceability.models.material import MaterialType, Material
 
 
 class MaterialAdmin(admin.ModelAdmin):
@@ -11,9 +11,5 @@ class MaterialAdmin(admin.ModelAdmin):
         'expiration_date', )
 
 
-class MaterialNameAdmin(admin.ModelAdmin):
+class MaterialTypeAdmin(admin.ModelAdmin):
     list_display = ('material_type', )
-
-
-admin.site.register(MaterialName, MaterialNameAdmin)
-admin.site.register(Material, MaterialAdmin)

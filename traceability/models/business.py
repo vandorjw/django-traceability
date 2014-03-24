@@ -9,7 +9,8 @@ class Business(models.Model):
     email = models.EmailField(max_length=255, blank=True)
 
     class meta:
-		abstract = True
+        app_label = 'traceability'
+        abstract = True
 
     def __str__(self):
         return self.name

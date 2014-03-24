@@ -16,5 +16,3 @@ class IncidentAdmin(admin.ModelAdmin):
         'title',
         'severity_level',
         'is_resolved', )
-
-admin.site.register(Incident, IncidentAdmin)

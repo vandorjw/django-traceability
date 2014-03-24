@@ -11,7 +11,3 @@ class EmployeeInline(admin.StackedInline):
 
 class UserAdmin(UserAdmin):
     inlines = (EmployeeInline, )
-
-
-admin.site.unregister(User)
-admin.site.register(User, UserAdmin)

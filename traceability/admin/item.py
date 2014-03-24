@@ -1,5 +1,5 @@
 from django.contrib import admin
-from traceability.models.Item import Item
+from traceability.models.item import Item
 
 
 class ItemAdmin(admin.ModelAdmin):
@@ -9,5 +9,5 @@ class ItemAdmin(admin.ModelAdmin):
                     'item_age',
                     'weight', )
 
-admin.site.register(Item, ItemAdmin)
+
 

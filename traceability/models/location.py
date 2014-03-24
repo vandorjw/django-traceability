@@ -55,6 +55,7 @@ class Country(models.Model):
         choices=AREAS, max_length=2, null=True, blank=True)
 
     class Meta:
+        app_label = 'traceability'
         verbose_name = 'Country'
         verbose_name_plural = 'Countries'
         ordering = ('name',)
@@ -71,6 +72,7 @@ class AdminArea(models.Model):
     active = models.BooleanField('Area is active', default=True)
 
     class Meta:
+        app_label = 'traceability'
         verbose_name = 'Administrative Area'
         verbose_name_plural = 'Administrative Areas'
         ordering = ('name',)
@@ -84,6 +86,7 @@ class Locality(models.Model):
     admin_area = models.ForeignKey(AdminArea)
 
     class Meta:
+        app_label = 'traceability'
         verbose_name = 'Locality'
         verbose_name_plural = 'Localities'
         ordering = ('name',)
@@ -99,6 +102,7 @@ class Address(models.Model):
     postal_code = models.CharField(max_length=255)
 
     class Meta:
+        app_label = 'traceability'
         verbose_name = 'Address'
         verbose_name_plural = 'Address'
         ordering = ('locality', 'street_name',)
