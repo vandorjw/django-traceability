@@ -6,15 +6,18 @@ from traceability.forms.batch import InputFormSet, BatchCreate, BatchUpdate
 
 
 class BatchDetail(generic.DetailView):
+    template_name = 'traceability/batch/batch_detail.html'
     model = Batch
 
 
 class BatchList(generic.ListView):
+    template_name = 'traceability/batch/batch_list.html'
     model = Batch
     paginate_by = 25
 
 
 class BatchUpdate(generic.UpdateView):
+    template_name = 'traceability/batch/batch_form.html'
     model = Batch
     form_class = BatchUpdate
 
@@ -50,7 +53,7 @@ class BatchCreate(generic.CreateView):
         start_s = form.cleaned_data['start_serial']
         end_s = form.cleaned_data['end_serial']
         slist = list(range(start_s, end_s+1))
-        data = [Batch(item_id=s, batch=self.object) for s in slist]
+        data = [Item(item_id=s, batch=self.object) for s in slist]
         Item.objects.bulk_create(data)
         return HttpResponseRedirect(self.object.get_absolute_url)
 

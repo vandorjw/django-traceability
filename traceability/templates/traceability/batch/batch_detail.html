@@ -26,12 +26,12 @@
           </tr>
           {% for input in batch.input_set.all %}
           <tr>
-            <td>{{ input.material.type }}</td>
+            <td>{{ input.material.material_type }}</td>
             <td>
               <a class="btn btn-primary btn-block" href={{input.material.get_absolute_url}}>{{ input.material }}</a>
             </td>
             <td>
-              <a class="btn btn-primary btn-block" href={{input.material.supplier.get_absolute_url}}>{{ input.material.supplier }}</a>
+              <a class="btn btn-primary btn-block" href={{input.material.material_supplier.get_absolute_url}}>{{ input.material.material_supplier }}</a>
             </td>
           </tr>
           {% endfor %}
@@ -69,7 +69,7 @@
       <!-- Table -->
       <table class="table">
         <tr>
-          <th>Wheel Number</th>
+          <th>Item ID</th>
           <th>Ship Log ID</th>
         </tr>
         {% for item in batch.item_set.all %}

@@ -12,7 +12,7 @@ class MaterialType(models.Model):
         ordering = ('material_type', )
         
     def __str__(self):
-        return self.name
+        return self.material_type
 
 
 class Material(models.Model):

@@ -17,7 +17,7 @@ class Batch(models.Model):
         ordering = ('batch_id', )
 
     def __str__(self):
-        return self.batch_id
+        return str(self.batch_id)
 
     def get_absolute_url(self):
         return reverse(
@@ -48,4 +48,4 @@ class Input(models.Model):
         unique_together = ['batch', 'material']
 
     def __str__(self):
-        return self.material
+        return str(self.material)

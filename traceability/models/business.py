@@ -8,7 +8,7 @@ class Business(models.Model):
     phone = models.CharField(max_length=255, blank=True)
     email = models.EmailField(max_length=255, blank=True)
 
-    class meta:
+    class Meta:
         app_label = 'traceability'
         abstract = True
 

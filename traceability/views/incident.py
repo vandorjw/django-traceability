@@ -6,24 +6,27 @@ from traceability.forms.incident import UpdateFormSet, IncidentUpdate
 
 class IncidentDetail(generic.DetailView):
     model = Incident
+    template_name = 'traceability/incident/incident_detail.html'
 
 
 class IncidentAffected(generic.DetailView):
     model = Incident
-    template_name = 'incident/incident_affected.html'
+    template_name = 'traceability/incident/incident_affected.html'
 
 
 class IncidentList(generic.ListView):
+    template_name = 'traceability/incident/incident_list.html'
     model = Incident
     paginate_by = 25
 
 
 class IncidentCreate(generic.CreateView):
+    template_name = 'traceability/incident/incident_form.html'
     model = Incident
 
 
 class IncidentUpdate(generic.UpdateView):
-    template_name = 'incident/incident_update.html'
+    template_name = 'traceability/incident/incident_update.html'
     model = Incident
     form_class = IncidentUpdate
 

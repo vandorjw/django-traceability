@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block page_title %}Suppliers{% endblock %}
+{% block page_title %}Employees{% endblock %}
 
 {% block content %}
 <table class="table">
@@ -10,17 +10,19 @@
     <th>Phone</th>
     <th>Email</th>
   </tr>
-  {% for supplier in object_list %}
+  {% for employee in employee_list %}
   <tr>
-    <td><a class="btn btn-primary btn-block" href="{{ supplier.get_absolute_url }}">{{ supplier }}</a></td>
-    <td>{{ supplier.address }}</td>
-    <td>{{ supplier.phone }}</td>
-    <td>{{ supplier.email }}</td>   
+    <td><a href="{{ supplier.get_absolute_url }}">{{ employee }}</a></td>
+    <td>{{ employee.address }}</td>
+    <td>{{ employee.phone }}</td>
+    <td>{{ employee.email }}</td>   
   </tr>
   {% endfor %}
 </table>
+
 {% if is_paginated %}
   {% include "traceability/includes/pagination.html" %}
 {% endif %}
+
 {% endblock %}
 

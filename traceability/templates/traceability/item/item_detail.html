@@ -68,7 +68,7 @@
       </tr>
       {% for input in item.batch.input_set.all %}
       <tr>
-        <td>{{ input.material.type }}</td>
+        <td>{{ input.material.material_type }}</td>
         <td>
           <a class="btn btn-default btn-block text-left" href="{{ input.material.get_absolute_url }}">
             <span>{{ input.material.material_id }}</span>

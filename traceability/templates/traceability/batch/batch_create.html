@@ -15,7 +15,6 @@
 {% endblock extra_js %}
 
 {% block content %}
-        <h1>Batch</h1>
         <form action="." method="post">{% csrf_token %}
             <div>
                 {{ form|crispy }}
